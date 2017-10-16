@@ -23,8 +23,10 @@ export class SpotifyService {
   }
 
   getArtist(id:string) {
-    this.artistUrl = `https://api.spotify.com/v1/atrists/${id}`;
-    return this._http.get(this.artistUrl)
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${this.token}`);
+    this.artistUrl = `https://api.spotify.com/v1/artists/${id}`;
+    return this._http.get(this.artistUrl, { headers })
       .map(res => res.json());
   }
 
