@@ -9,6 +9,7 @@ export class SpotifyService {
   private client_id = spotifyKeys.client_id;
   private client_secret = spotifyKeys.client_secret;
   private token = spotifyKeys.token;
+  private artistUrl: string;
 
   constructor(private _http: Http) {
   }
@@ -18,6 +19,12 @@ export class SpotifyService {
     headers.append('Authorization', `Bearer ${this.token}`);
     this.searchUrl = `https://api.spotify.com/v1/search?q=${str}&offset=0&limit=20&type=${type}&market=US`;
     return this._http.get(this.searchUrl, { headers })
+      .map(res => res.json());
+  }
+
+  getArtist(id:string) {
+    this.artistUrl = `https://api.spotify.com/v1/atrists/${id}`;
+    return this._http.get(this.artistUrl)
       .map(res => res.json());
   }
 
