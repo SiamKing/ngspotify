@@ -11,6 +11,8 @@ export class SpotifyService {
   private token = spotifyKeys.token;
   private artistUrl: string;
   private albumsUrl: string;
+  private albumUrl: string;
+
 
   constructor(private _http: Http) {
   }
@@ -36,6 +38,14 @@ export class SpotifyService {
     headers.append('Authorization', `Bearer ${this.token}`);
     this.albumsUrl = `https://api.spotify.com/v1/artists/${artistId}/albums`;
     return this._http.get(this.albumsUrl, { headers })
+      .map(res => res.json());
+  }
+
+  getAlbum(id: string) {
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${this.token}`);
+    this.albumUrl = `https://api.spotify.com/v1/albums/${id}`;
+    return this._http.get(this.albumUrl, { headers })
       .map(res => res.json());
   }
 
