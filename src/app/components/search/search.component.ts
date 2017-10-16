@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
   moduleId: module.id,
   selector: 'search',
   templateUrl: 'search.component.html',
-  styleUrls: ['./app.component.css']
 })
 export class SearchComponent {
 }
